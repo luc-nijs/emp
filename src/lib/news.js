@@ -67,7 +67,7 @@ function pictureHtml(link) {
 // The sheet's last row shows first, so a row added at the bottom tops the news.
 export function newsHtml(recs) {
   return [...recs].reverse().map((r) => {
-    const see = r.link ? ` see <a class="line" href="${esc(r.link)}" target="_blank" rel="noopener">here</a>` : '';
+    const see = r.link ? `<br>see <a class="line" href="${esc(r.link)}" target="_blank" rel="noopener">here</a>` : '';
     return `<div class="news-item"><p>${esc(r.text)}${see}</p>${pictureHtml(r.picture)}</div>`;
   }).join('');
 }
