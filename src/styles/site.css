@@ -53,12 +53,13 @@ footer { position: relative; height: 127px; background: #fff; }
 .welcome { padding-top: 43px; text-align: center; font: 600 21px/29.4px var(--head); }
 .welcome .blue { color: var(--blue); }
 .welcome-photo { width: 198px; height: 242px; margin: 15px auto 0; object-fit: cover; }
-.news { position: relative; width: min(690px, 100% - 32px); min-height: 269px; margin: 31px auto 63px; padding: 0 8px; background: var(--news); }
+.news { width: min(690px, 100% - 32px); margin: 31px auto 63px; padding: 0 8px 12px; background: var(--news); }
 .news h4 { margin-left: -8px; font-size: 20px; line-height: 28px; }
 .news p { font-size: 14px; line-height: 23.38px; }
-.news .n1 { margin-top: 20px; }
-.news .n2 { margin-top: 7px; }
-.news-cover { position: absolute; left: 397px; top: 150px; width: 158px; height: 111px; object-fit: cover; }
+.news-item { display: flex; align-items: flex-start; gap: 24px; margin-top: 20px; }
+.news-item p { flex: 1; min-width: 0; }
+/* Every picture gets the same height and stays whole, lined up on the right. */
+.news-picture { flex: none; width: 150px; height: 100px; object-fit: contain; object-position: right center; }
 
 /* About */
 .about { padding-top: 24px; }
@@ -154,8 +155,8 @@ footer { position: relative; height: 127px; background: #fff; }
   .logos, .copy { position: static; }
   .copy { white-space: normal; text-align: center; }
   html { scroll-padding-top: 16px; }
-  .news-cover { position: static; margin: 12px 0 16px; }
-  .news { min-height: 0; }
+  .news-item { flex-direction: column; gap: 12px; }
+  .news-picture { object-position: left center; }
   .lectures, .media, .under { padding-left: 0; }
   .lectures .what { padding-left: 24px; }
   .media img { width: 100%; height: auto; margin-left: 0; }
