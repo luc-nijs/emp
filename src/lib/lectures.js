@@ -48,8 +48,10 @@ export const coordKey = (r) => placed(r) ? r.lat.toFixed(4) + "," + r.lon.toFixe
 
 // Who gave it, and with whom: "Melissa & Luc, with Sabine Chatelain".
 export const whoHtml = (r, cls) => {
-  const who = [r.speaker, r.people ? `with ${r.people}` : ""].filter(Boolean).join(", ");
-  return who ? `<br><span class="${cls}">${esc(who)}</span>` : "";
+  if (!r.speaker && !r.people) return "";
+  const speaker = r.speaker ? `<span class="lm-who">${esc(r.speaker)}</span>` : "";
+  const people = r.people ? `${r.speaker ? ", " : ""}with ${esc(r.people)}` : "";
+  return `<br><span class="${cls}">${speaker}${people}</span>`;
 };
 
 // `all` is the full list: each row remembers its position in it, for the map.

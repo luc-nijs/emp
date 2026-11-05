@@ -53,6 +53,7 @@
 #lecture-map-app .lm-item:hover { background: var(--band); }
 #lecture-map-app .lm-item.lm-on { background: var(--band); border-left-color: var(--blue); }
 #lecture-map-app .lm-m { font-size: 13px; line-height: 18px; color: #5f5f5f; }
+#lecture-map-app .lm-who { color: #6a4f9c; }
 #lecture-map-app .lm-item a { color: var(--blue); }
 #lecture-map-app .lm-item a:hover { text-decoration: underline; }
 #lecture-map-app .lm-online { margin-left: 2px; vertical-align: -1px; color: #5f5f5f; }
