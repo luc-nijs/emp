@@ -19,7 +19,7 @@ try {
 }
 const dataJson = JSON.stringify(records).replace(/</g, '\\u003c');
 ---
-<Base title="Publications | Embodied Music Pedagogy" path="/publications">
+<Base title={"Publications | Embodied Music Pedagogy"} description={"Articles, books and chapters on music learning and teaching by Melissa Bremmer and Luc Nijs, to filter by author, year, type and role."} path="/publications" heading={"Publications by Melissa Bremmer and Luc Nijs"}>
   <div class="pub-tabs" id="pb-tabs">
     {SECTION_ORDER.map((s) => <a href={`#${sectionId(s)}`}>{s}</a>)}
   </div>

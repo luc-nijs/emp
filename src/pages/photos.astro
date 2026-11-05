@@ -10,7 +10,7 @@ const slides = [
 ];
 const arrow = (d) => `<svg viewBox="0 0 20 43" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><path d="${d}"/></svg>`;
 ---
-<Base title="Photos | Embodied Music Pedagogy" path="/photos">
+<Base title={"Photos | Embodied Music Pedagogy"} description={"Photos of panels, workshops and presentations on Embodied Music Pedagogy, in Copenhagen and at the ISME conferences of 2024 and 2026."} path="/photos" heading={"Photos of Embodied Music Pedagogy events"}>
   <div class="show page-end" data-show>
     <div class="show-frame">
       {slides.map((s, i) => <img class={i === 0 ? 'active' : ''} src={s.src} alt={s.alt} loading={i === 0 ? 'eager' : 'lazy'} />)}
