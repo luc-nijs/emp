@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+
+// The browser title below is the one the Wix page has, kept as is for the exact copy.
+const pdf = (file) => `<a href="/files/${file}" target="_blank" rel="noopener">pdf</a>`;
+---
+<Base title="About | M&B Remodeling" path="/embodiedunderground">
+  <div class="col under page-end">
+    <h6 class="head22">Presentation slides</h6>
+    <a class="small-link" href="/files/embodied-underground-slides.pdf" target="_blank" rel="noopener">pdf</a>
+    <h6 class="head22 articles-head">Articles</h6>
+    <div class="refs">
+      <p set:html={`Bremmer, M. &amp; Nijs, L. (2024). Embodiment in music education. <i>Journal de recherche en éducations artistiques</i>, 2, Special issue edited by P. Terrien &amp; S. Chatelein, 2, 13-26. ${pdf('bremmer-nijs-2024-embodiment-in-music-education.pdf')}`} />
+      <p>–</p>
+      <p set:html={`Nijs, L., Bremmer, M., Van der Schyff, D. &amp; Schiavio, A. (2023). Embodying dynamical systems in music performance. <i>Music Performance Research</i>. ${pdf('nijs-et-al-2023-embodying-dynamical-systems.pdf')}`} />
+      <p class="sp"></p>
+      <p set:html={`Bremmer, M. &amp; Nijs, L. (2022). Embodied Music Pedagogy. A Theoretical and Practical Account of the Dynamic Role of the Body in Music Educationn. In T. Buchborn, S. Schmid, G. Brunner, and Th. De Baets (Eds.), <i>European perspectives on music education: Music Is What People Do </i>(pp. 29–46). Helbling. ${pdf('bremmer-nijs-2022-embodied-music-pedagogy-underground.pdf')}`} />
+      <p class="sp"></p>
+      <p set:html={`Nijs, L. &amp; Bremmer, M. (2019). Embodiment and Early Childhood Music Education. In B. Ilari &amp; S. Young. <i>Music in Early Childhood: Multi-disciplinary Perspectives and Inter-disciplinary Exchanges </i>(pp. 87-102). Springer International Publishing. ${pdf('nijs-bremmer-2019-embodiment-early-childhood.pdf')}`} />
+    </div>
+  </div>
+</Base>

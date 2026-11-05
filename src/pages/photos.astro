@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+
+const slides = [
+  { src: '/images/slide-1-panel-copenhagen.jpg', alt: 'Panel in Copenhagen' },
+  { src: '/images/slide-2-workshop-copenhagen.jpg', alt: 'Workshop in Copenhagen' },
+  { src: '/images/isme-2024.jpg', alt: 'Workshop at ISME 2024' },
+  { src: '/images/slide-4-isme-2024.jpg', alt: 'Workshop at ISME 2024' },
+  { src: '/images/slide-5-isme-2026.jpg', alt: 'Presentation at ISME 2026' },
+];
+const arrow = (d) => `<svg viewBox="0 0 20 43" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><path d="${d}"/></svg>`;
+---
+<Base title="Photos | Embodied Music Pedagogy" path="/photos">
+  <div class="show page-end" data-show>
+    <div class="show-frame">
+      {slides.map((s, i) => <img class={i === 0 ? 'active' : ''} src={s.src} alt={s.alt} loading={i === 0 ? 'eager' : 'lazy'} />)}
+      <button class="prev" type="button" aria-label="Previous" set:html={arrow('M18 2 2 21.5 18 41')} />
+      <button class="next" type="button" aria-label="Next" set:html={arrow('M2 2l16 19.5L2 41')} />
+    </div>
+    <div class="dots">
+      {slides.map((_, i) => <a href="#" class={i === 0 ? 'active' : ''} aria-label={`Slide ${i + 1}`} />)}
+    </div>
+  </div>
+  <script>
+    const root = document.querySelector<HTMLElement>('[data-show]');
+    if (root) {
+      const images = [...root.querySelectorAll<HTMLImageElement>('.show-frame img')];
+      const dots = [...root.querySelectorAll<HTMLAnchorElement>('.dots a')];
+      let at = 0;
+      const go = (n: number) => {
+        at = (n + images.length) % images.length;
+        images.forEach((img, i) => {
+          if (i === at) img.loading = 'eager';
+          img.classList.toggle('active', i === at);
+        });
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === at));
+      };
+      root.querySelector('.prev')?.addEventListener('click', () => go(at - 1));
+      root.querySelector('.next')?.addEventListener('click', () => go(at + 1));
+      dots.forEach((dot, i) => dot.addEventListener('click', (e) => { e.preventDefault(); go(i); }));
+    }
+  </script>
+</Base>

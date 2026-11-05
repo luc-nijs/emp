@@ -1,0 +1,172 @@
+:root {
+  color-scheme: light;
+  --head: Fraunces, Georgia, serif;
+  --body: Manrope, system-ui, sans-serif;
+  --text: #281a39;
+  --blue: #008afc;
+  --band: #f6f6f6;
+  --news: rgba(32, 97, 183, .18);
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: 150px; }
+body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; background: #fff; color: var(--text); font: 400 15px/21px var(--body); }
+body > main { flex: 1; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+p { margin: 0; }
+h1, h2, h3, h4, h5, h6 { margin: 0; font-family: var(--head); font-weight: 600; }
+
+/* Header: stays in view while scrolling, as on the Wix site */
+header.top { position: sticky; top: 0; z-index: 20; height: 138px; background: var(--band); }
+.top-in { position: relative; display: flex; justify-content: space-between; align-items: flex-start; height: 100%; padding: 45px max(16px, calc((100vw - 1120px) / 2)) 0 max(29px, calc((100vw - 1104px) / 2)); }
+.site-title { font: 600 37px/45px var(--head); white-space: nowrap; }
+.site-title::after { content: ""; position: absolute; top: 98px; left: calc(max(29px, calc((100vw - 1104px) / 2)) + 75px); width: 429px; height: 3px; background: var(--blue); opacity: .7; }
+.menu, .sub { list-style: none; margin: 0; padding: 0; }
+.menu { display: flex; font-size: 14px; font-weight: 700; }
+.menu > li { position: relative; }
+.menu a { display: block; padding: 5px 12px; white-space: nowrap; }
+.menu a:hover { color: #6b6b6b; }
+.menu a.on { color: var(--blue); }
+.sub { display: none; position: absolute; top: 100%; left: 0; min-width: 100%; background: var(--band); }
+.has-sub:hover .sub, .has-sub:focus-within .sub { display: block; }
+
+/* Footer: scrolls with the page, so long pages keep more room for reading (the Wix footer stays fixed).
+   On short pages it still sits at the bottom of the window. */
+footer { position: relative; height: 127px; background: #fff; }
+.logos { position: absolute; top: 32px; left: calc(50% - 98px); display: flex; gap: 29px; }
+.logos img { height: 55px; object-fit: cover; }
+.logo-aua { width: 69px; }
+.logo-unilu { width: 91px; }
+.copy { position: absolute; top: 95px; left: min(calc(50% + 529px), calc(100% - 293px)); white-space: nowrap; }
+
+/* Page column */
+.col { width: min(912px, 100% - 32px); margin-inline: auto; }
+.page-end, .col.lectures, .col.media, .col.under { padding-bottom: 60px; }
+.heavy { font-weight: 700; }
+.blue { color: var(--blue); }
+.line { text-decoration: underline; }
+.sp { height: 21px; }
+.head22 { font: 600 22px/31px var(--head); }
+.small-link { font-size: 14px; line-height: 20px; font-weight: 700; color: var(--blue); }
+
+/* Home */
+.welcome { padding-top: 43px; text-align: center; font: 600 21px/29.4px var(--head); }
+.welcome .blue { color: var(--blue); }
+.welcome-photo { width: 198px; height: 242px; margin: 15px auto 0; object-fit: cover; }
+.news { position: relative; width: min(690px, 100% - 32px); min-height: 269px; margin: 31px auto 63px; padding: 0 8px; background: var(--news); }
+.news h4 { margin-left: -8px; font-size: 20px; line-height: 28px; }
+.news p { font-size: 14px; line-height: 23.38px; }
+.news .n1 { margin-top: 20px; }
+.news .n2 { margin-top: 7px; }
+.news-cover { position: absolute; left: 397px; top: 150px; width: 158px; height: 111px; object-fit: cover; }
+
+/* About */
+.about { padding-top: 24px; }
+.about .intro { margin-top: 19px; font-size: 18px; line-height: 25px; font-weight: 700; }
+.about .people-head { margin-top: 14px; }
+.person { display: flex; gap: 29px; margin-top: 29px; }
+.person img { flex: none; width: 123px; height: 185px; object-fit: cover; }
+.person p { font-size: 18px; line-height: 25px; }
+.person .small-link { display: inline-block; margin-top: 6px; }
+.person + .person { margin-top: 24px; }
+
+/* Publications */
+.pub-tabs { display: flex; justify-content: center; gap: 12px; padding-top: 6px; }
+.pub-tabs a { display: flex; align-items: center; justify-content: center; width: 142px; height: 40px; background: var(--band); color: var(--blue); font-size: 10px; font-weight: 700; letter-spacing: .1em; }
+.refs { font-weight: 700; }
+.refs h5 { margin: 28px 0 15px; font-size: 21px; line-height: 29.4px; }
+.refs p + p { margin-top: 21px; }
+.refs a { color: var(--blue); overflow-wrap: anywhere; }
+.refs i { font-style: italic; }
+
+/* Lectures */
+.lectures { padding: 34px 0 0 11px; }
+.lectures .year { font: 600 21px/29.4px var(--head); text-align: center; }
+.lectures .when { font-weight: 700; }
+.lectures .what { padding-left: 80px; color: var(--blue); font-weight: 300; }
+.lectures .what a { text-decoration: underline; }
+
+/* Media */
+.media { padding: 39px 0 0 12px; font-weight: 700; }
+.media .links { margin-top: 51px; text-align: center; color: var(--blue); }
+.media .links .plain { color: var(--text); }
+.media .pod-head { margin-top: 51px; }
+.media img { width: 380px; height: 87px; margin: 25px 0 0 230px; object-fit: cover; }
+
+/* Powerpoint */
+.slides-note { padding-top: 28px; text-align: center; font-size: 16px; font-weight: 700; }
+.slides-tile { display: block; width: 413px; max-width: 100%; margin: 58px 0 0 13px; }
+
+/* Photos */
+.show { position: relative; width: min(781px, 100% - 32px); margin: 48px auto 0; }
+.show-frame { position: relative; aspect-ratio: 781 / 517; overflow: hidden; }
+.show-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .4s; }
+.show-frame img.active { opacity: 1; }
+.show button { position: absolute; top: 50%; z-index: 2; width: 20px; height: 43px; padding: 0; transform: translateY(-50%); background: none; border: 0; cursor: pointer; }
+.show button svg { display: block; width: 100%; height: 100%; }
+.show .prev { left: 18px; }
+.show .next { right: 18px; }
+.dots { display: flex; justify-content: center; gap: 6px; margin-top: 16px; }
+.dots a { width: 8px; height: 8px; border-radius: 50%; background: #c9c9c9; }
+.dots a.active { background: var(--text); }
+
+/* Videos */
+.videos { padding-top: 43px; }
+.videos h5 { font-size: 28px; line-height: 39px; }
+.videos .sub-title { margin: 0; font: 300 28px/39px var(--body); }
+.video-slot { display: block; width: 480px; max-width: 100%; aspect-ratio: 16 / 9; margin: 21px auto 0; }
+
+/* ISME 2024 */
+.isme { padding-top: 44px; }
+.isme .links { display: flex; gap: 40px; margin-top: 46px; }
+.isme img { width: 477px; height: 324px; margin-top: 36px; object-fit: cover; }
+
+/* Embodied Underground */
+.under { padding: 44px 0 0 9px; width: min(882px, 100% - 32px); }
+.under .small-link { display: block; margin-top: 6px; }
+.under .articles-head { margin-top: 11px; }
+.under .refs { margin-top: 25px; }
+.under .refs p + p { margin-top: 0; }
+
+/* On EMP */
+.on-emp { padding-top: 24px; font-size: 18px; line-height: 25px; font-weight: 700; }
+
+/* Contact */
+.contact { width: min(450px, 100% - 32px); margin-inline: auto; padding-top: 51px; font-size: 14px; }
+.contact h1 { font-size: 30px; line-height: 43px; }
+.contact form { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 30px; margin-top: 40px; }
+.contact label { display: block; line-height: 16px; }
+.contact .full { grid-column: 1 / -1; }
+.contact input, .contact textarea { display: block; width: 100%; height: 44px; padding: 0; background: none; border: 0; border-bottom: 2px solid #000; border-radius: 0; font: inherit; font-size: 18px; color: var(--text); outline-offset: 2px; }
+.contact textarea { height: 88px; resize: vertical; }
+.contact button { width: 147px; height: 42px; background: var(--blue); border: 0; border-radius: 300px; color: #fff; font: 400 16px var(--body); cursor: pointer; }
+.contact .note { grid-column: 1 / -1; }
+.contact .note a { color: var(--blue); text-decoration: underline; }
+
+/* Narrower windows: the header and footer scroll with the page, and everything stacks */
+@media (max-width: 1000px) {
+  header.top { position: static; height: auto; padding-bottom: 14px; }
+  .top-in { flex-direction: column; align-items: center; gap: 22px; height: auto; padding: 24px 16px 0; }
+  .site-title { font-size: clamp(26px, 7vw, 37px); line-height: 1.2; }
+  .site-title::after { display: none; }
+  .menu { flex-wrap: wrap; justify-content: center; }
+  footer { position: static; height: auto; padding: 24px 16px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .logos, .copy { position: static; }
+  .copy { white-space: normal; text-align: center; }
+  html { scroll-padding-top: 16px; }
+  .news-cover { position: static; margin: 12px 0 16px; }
+  .news { min-height: 0; }
+  .lectures, .media, .under { padding-left: 0; }
+  .lectures .what { padding-left: 24px; }
+  .media img { width: 100%; height: auto; margin-left: 0; }
+  .slides-tile { margin-left: 0; }
+  .isme img { width: 100%; height: auto; }
+  .pub-tabs { flex-wrap: wrap; }
+}
+@media (max-width: 560px) {
+  .person { flex-direction: column; gap: 12px; }
+  .contact form { grid-template-columns: 1fr; }
+  .contact .full { grid-column: auto; }
+  .contact .note { grid-column: auto; }
+  .videos h5, .videos .sub-title { font-size: 22px; line-height: 31px; }
+}

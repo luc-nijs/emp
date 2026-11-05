@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Text is kept exactly as on the Wix site, including where its italics start and stop.
+const ext = (href, label = href) => `<a href="${href}" target="_blank" rel="noopener">${label}</a>`;
+const doi = (id) => ext(`https://doi.org/${id}`);
+const pdf = (file) => `<a href="/files/${file}" target="_blank" rel="noopener">pdf</a>`;
+
+const both = [
+  'Bremmer, M. &amp; Nijs, L. (forthcoming). Embodied Learning and Teaching in Arts Education. <i>International Journal for Arts and Education</i>',
+  'Nijs, L. &amp; Bremmer, M. (invited). The Body-Instrument Nexus as a Site of Creativity. In G. E. McPherson &amp; J. Blackwell (Eds.), <i>The New Oxford Handbook of Music Education. </i>Oxford University Press',
+  'Nijs, L. &amp; Bremmer, M. (2026). Towards an embodied instrumental music pedagogy: creativity through embodied affordance navigation. Invited book chapter, in B. Föllmi &amp; E. Pineda (2026), <i>Musique et transmission à la lumière des sciences cognitives</i>. Éditions des Archives Contemporaines. ISBN : 9782813005748',
+  `Bremmer, M. &amp; Nijs, L. (2024). Belichaamd leren en doceren in Kunsteducatie [Embodied learning and teaching in Arts Education]. <i>Cultuur+Educatie,</i> special issue. ${ext('https://www.ahk.nl/media/ahk/docs/lectoraat/CE_68_De_kracht_van_belichaamd_leren_en_doceren_in_kunsteducatie_DT.pdf', 'pdf')}`,
+  `Bremmer, M. &amp; Nijs, L. (2024). Materiaal in Belichaamde Muziekdidactiek [Materials in Embodied Music Pedagogy]. <i>Kunstzone</i>, 4, <i>31-32. </i>${pdf('bremmer-nijs-2024-kunstzone.pdf')}`,
+  `Bremmer, M. &amp; Nijs, L. (2024). Embodiment in music education. <i>Journal de recherche en éducations artistiques, 2</i>, Special issue edited by P. Terrien &amp; S. Chatelein, 2, 13-26. ${ext('https://www.jrea.ch/article/view/4717')}.`,
+  `Nijs, L., Bremmer, M., Van der Schyff, D. &amp; Schiavio, A. (2023) Embodying dynamical systems in music performance. <i>Music Performance Research</i>. ${doi('10.14439/mpr.11.3')}.`,
+  `Bremmer, M. &amp; Nijs, L. (2022). Embodied Music Pedagogy. A vision on the dynamic role of the body in music education. In T. Buchborn, S. Schmid, G. Brunner, and Th. De Baets (Eds.), <i>European perspectives on music education: Music Is What People D</i>o (pp. 29–46). Helbling. ${pdf('bremmer-nijs-2022-embodied-music-pedagogy.pdf')}`,
+  'Bremmer, M. &amp; Nijs, L. (2021). Lichamelijkheid in muziekonderwijs [Corporeality in music education]. In A. De Vugt &amp; T. De Baets (Eds.). <i>Muziekpedagogiek in beweging: Typisch muziek</i>! (Muziekpedagogiek in beweging, Vol. 4) (pp. 49-62). Euprint.',
+  `Bremmer, M. and Nijs, L. (2020). The Role of the Body in Instrumental and Vocal Music Pedagogy: A Dynamical<br />Systems Theory Perspective on the Music Teacher’s Bodily Engagement in Teaching and Learning. <i>Frontiers in Education</i>, 5:79. ${doi('10.3389/feduc.2020.00079')}.`,
+  'Nijs, L. &amp; Bremmer, M. (2019). Embodiment and Early Childhood Music Education. In B. Ilari &amp; S. Young. <i>Music in Early Childhood: Multi-disciplinary Perspectives and Inter-disciplinary Exchanges </i>(pp. 87–102). Springer International Publishing.',
+];
+
+const bremmer = [
+  `Bremmer, M. (2021). Where’s the body? Reconsidering the concept of pedagogical content knowledge through research in music education with Dutch specialist preschool music teachers. <i>British Journal of Music Education, 38</i>(2), 119-130. ${doi('10.1017/S0265051720000285')}.`,
+  `Bremmer, M. (2021). Does the body count as evidence? Exploring the embodied pedagogical content knowledge concerning rhythm skills of a Dutch specialist preschool music teacher. <i>International Journal of Music in Early Childhood, 16</i>(1), 89-103. ${doi('10.1386/ijmec_00029_1')}.`,
+  `Bremmer, M., Hermans, C., &amp; Lamers, V. (2021). The charmed dyad: Multimodal music lessons for pupils with severe or multiple disabilities. <i>Research Studies in Music Education, 43</i>(2), 259-272. ${doi('10.1177/1321103X20974802')}`,
+  'Bremmer, M. (2015). The role of the teacher’s body in music education: Pedagogical content knowledge viewed from an embodied cognition perspective. <i>International Yearbook for Research in Arts Education, 3</i>, 48-53.',
+];
+
+const nijs = [
+  `Nijs, L. &amp; Behzadaval, B. (invited). Exploring Embodiment Through Augmented Reality in Music Education. In G. E. McPherson &amp; J. Blackwell (Eds.), <i>The New Oxford Handbook of Music Education. </i>Oxford University Press`,
+  `Nijs, L. (2025). Fostering a synergy between the development of well-being and musicianship: a kinemusical perspective. Submitted to Education Sciences, 15(9), 1245. ${doi('10.3390/educsci15091245')}`,
+  `Reynaert, T. , De bisschop, A. and Nijs, L. (2025) Participatory songwriting in a Belgian Asylum Reception Center: Addressing Challenges through Embodied Strategies<i>, 16</i>. ${doi('10.3389/fpsyg.2025.1602017')}`,
+  `Nijs, L. (2025). Fostering a synergy between the development of well-being and musicianship: a kinemusical perspective. <i>Education Sciences, 15</i>(9), 1245. ${doi('10.3390/educsci15091245')}`,
+  `Nijs, L. (2024). <i>Bewegend lerend musiceren. Een kinemuzikale benadering van het instrumentaal muziekonderwij</i>s [Learning to play music through movement. A kinemusical approach to instrumental music education]. Garant. ${ext('https://www.maklugarant.eu/nl/products/details/bewegend-leren-musiceren-een-kinemuzikale-benadering-van-het-instrumentaal-muziekonderwijs-luc-nijs-9789044139334-457631', 'ISBN 978-90-441-3933-4')}`,
+  `Nijs, L., Grinspun, N. &amp; Fortuna, S. (2024). Creativity through movement: navigating the musical affordance space. <i>Creativity Research Journal</i>. ${doi('10.1080/10400419.2023.2299159')}.`,
+  `Nicoloau, G. &amp; Nijs,L., &amp; Van Petegem, P. (2023). Moving in Musicking: The evolving pedagogical practice of the artist-facilitator within asylum seeker centers. <i>Frontiers in Psychology.</i> ${doi('10.3389/fpsyg.2023.1177355')}.`,
+  `Nijs, L. &amp; Nicolaou, G. (2021). Flourishing in resonance: joint resilience building through music and motion. <i>Frontiers in Psychology, Research Topic on Eudaimonia and music learning</i>. ${doi('10.3389/fpsyg.2021.666702')}.`,
+  `Fortuna, S. &amp; Nijs, L. (2021). The Influence of Body Movement on Children's Musical Sense-Making: an intervention-based study. <i>British Journal of Music Education, 39(</i>2):183-202. ${doi('10.1017/S026505172200002X')}.`,
+  `Fortuna, S. &amp; Nijs, L. (2019): Children’s representational strategies based on verbal versus bodily interactions with music: an intervention-based study. Music Education Research, 22(1), 107-127. ${ext('https://doi.org/10.1080/14613808.2019.1699521', 'https://doi.org/10.1080/14613808.2019.1699521.')}`,
+  `Nijs, L. (2019). Moving together while playing music: promoting involvement through student-centred collaborative practices. In St. Gies &amp; J.H. Sætre (Eds.), <i>Becoming musicians – student involvement and teacher collaboration in higher music education</i> (pp. 239 – 260). The Norwegian Academy of Music. ${ext('https://nmh.brage.unit.no/nmh-xmlui/handle/11250/2642235', 'link')}`,
+];
+
+const sections = [
+  { id: 'nijs-bremmer', title: 'Nijs & Bremmer', items: both },
+  { id: 'bremmer', title: 'Bremmer', items: bremmer },
+  { id: 'nijs', title: 'Nijs', items: nijs },
+];
+---
+<Base title="Publications | Embodied Music Pedagogy" path="/publications">
+  <div class="pub-tabs">
+    {sections.map((s) => <a href={`#${s.id}`}>{s.title}</a>)}
+  </div>
+  <div class="col refs page-end">
+    {sections.map((s) => (
+      <section>
+        <h5 id={s.id}>{s.title}</h5>
+        {s.items.map((html) => <p set:html={html} />)}
+      </section>
+    ))}
+  </div>
+</Base>

@@ -1,0 +1,49 @@
+---
+import '../styles/site.css';
+import { nav } from '../data/nav.js';
+
+interface Props { title: string; path: string }
+const { title, path } = Astro.props;
+
+// A page in a dropdown keeps its parent highlighted, as on the Wix site.
+const isOn = (item) => item.href === path || (item.children ?? []).some((c) => c.href === path);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Manrope:wght@300..700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="top-in">
+        <a class="site-title" href="/">Embodied Music Pedagogy</a>
+        <nav aria-label="Main">
+          <ul class="menu">
+            {nav.map((item) => (
+              <li class={item.children ? 'has-sub' : ''}>
+                <a href={item.href} class={isOn(item) ? 'on' : ''}>{item.label}</a>
+                {item.children && (
+                  <ul class="sub">
+                    {item.children.map((c) => <li><a href={c.href} class={c.href === path ? 'on' : ''}>{c.label}</a></li>)}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main><slot /></main>
+    <footer>
+      <div class="logos">
+        <img class="logo-aua" src="/images/logo-aua.png" alt="Amsterdam University of the Arts" width="69" height="55" />
+        <img class="logo-unilu" src="/images/logo-unilu.png" alt="University of Luxembourg" width="91" height="55" />
+      </div>
+      <p class="copy">© 2024 by Luc Nijs &amp; Melissa Bremmer</p>
+    </footer>
+  </body>
+</html>
