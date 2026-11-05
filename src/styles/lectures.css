@@ -1,0 +1,90 @@
+#lecture-map-app {
+  display: flex; flex-direction: column;
+  height: 640px;
+  padding-top: 22px;
+}
+
+/* Control bar */
+#lecture-map-app .lm-controls {
+  flex: 0 0 auto;
+  display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center;
+  margin-bottom: 14px; padding: 12px 14px; background: var(--band);
+  font-size: 13px; line-height: 18px;
+}
+#lecture-map-app .lm-controls > span { display: inline-flex; align-items: center; gap: 6px; }
+#lecture-map-app select,
+#lecture-map-app input[type="search"] {
+  height: 32px; padding: 0 8px;
+  background: #fff; border: 1px solid #c9c9c9; border-radius: 0;
+  color: var(--text); font: inherit;
+}
+#lecture-map-app select:focus-visible,
+#lecture-map-app input[type="search"]:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+#lecture-map-app .lm-count { margin-left: auto; }
+
+/* Map beside the list on wide windows, stacked on narrow ones */
+#lecture-map-app .lm-split { flex: 1 1 auto; display: flex; gap: 18px; min-height: 0; }
+#lecture-map { flex: 1 1 54%; min-width: 0; min-height: 180px; background: var(--band); isolation: isolate; }
+#lm-list-pane {
+  flex: 1 1 46%; min-width: 0; min-height: 0; overflow-y: auto; padding-right: 10px;
+  scrollbar-width: thin; scrollbar-color: #dcdce0 transparent;
+}
+#lm-list-pane:hover { scrollbar-color: rgba(0, 138, 252, .55) transparent; }
+/* Browsers without the two properties above (older Safari) */
+@supports not (scrollbar-width: thin) {
+  #lm-list-pane::-webkit-scrollbar { width: 5px; }
+  #lm-list-pane::-webkit-scrollbar-track { background: transparent; }
+  #lm-list-pane::-webkit-scrollbar-thumb { background: #dcdce0; border-radius: 5px; }
+  #lm-list-pane:hover::-webkit-scrollbar-thumb { background: rgba(0, 138, 252, .55); }
+}
+
+/* The list */
+#lecture-map-app .lm-year {
+  position: sticky; top: 0; z-index: 2;
+  margin: 14px 0 6px; padding: 2px 0 4px; background: #fff;
+  font: 600 21px/29.4px var(--head);
+}
+#lecture-map-app .lm-year:first-child { margin-top: 0; }
+#lecture-map-app .lm-year span { margin-left: 4px; font: 400 13px/18px var(--body); color: #6b6b6b; }
+#lecture-map-app .lm-item {
+  padding: 7px 8px; border-left: 3px solid transparent; cursor: pointer;
+  font-size: 14px; line-height: 20px;
+}
+#lecture-map-app .lm-item:hover { background: var(--band); }
+#lecture-map-app .lm-item.lm-on { background: var(--band); border-left-color: var(--blue); }
+#lecture-map-app .lm-m { font-size: 13px; line-height: 18px; color: #5f5f5f; }
+#lecture-map-app .lm-item a { color: var(--blue); }
+#lecture-map-app .lm-item a:hover { text-decoration: underline; }
+#lecture-map-app .lm-online { margin-left: 2px; vertical-align: -1px; color: #5f5f5f; }
+#lecture-map-app .lm-dot { display: inline-block; width: 9px; height: 9px; margin-right: 6px; border-radius: 50%; }
+#lecture-map-app .lm-status { flex: 0 0 auto; padding-top: 10px; font-size: 13px; color: #6b6b6b; }
+#lecture-map-app .lm-status.lm-error { color: #b4442e; }
+
+/* Map popup and legend */
+#lecture-map-app .lm-pop { max-width: 16rem; font: 400 13px/18px var(--body); color: var(--text); }
+#lecture-map-app .lm-pop h4 { margin-bottom: 2px; font-size: 16px; line-height: 22px; }
+#lecture-map-app .lm-pop a { color: var(--blue); }
+#lecture-map-app .lm-place { color: #5f5f5f; }
+#lecture-map-app .lm-pop ul { margin: 6px 0 0; padding-left: 16px; }
+#lecture-map-app .lm-pop li { margin-bottom: 5px; }
+#lecture-map-app .lm-legend {
+  padding: 6px 9px; background: rgba(255, 255, 255, .92);
+  font: 400 12px/18px var(--body); color: var(--text);
+}
+#lecture-map-app .lm-legend i { display: inline-block; width: 10px; height: 10px; margin-right: 6px; border-radius: 50%; vertical-align: middle; }
+
+/* Leaflet expects the browser's default box sizing */
+#lecture-map, #lecture-map * { box-sizing: content-box; }
+
+@media (max-width: 760px) {
+  #lecture-map-app { height: auto; }
+  #lecture-map-app .lm-split { flex-direction: column; }
+  #lecture-map { flex: 0 0 240px; }
+  #lm-list-pane { flex: 0 0 auto; height: 520px; }
+}
+@media (max-width: 560px) {
+  #lecture-map-app .lm-controls > span { flex: 1 1 100%; }
+  #lecture-map-app .lm-controls label:first-child { min-width: 62px; }
+  #lecture-map-app select, #lecture-map-app input[type="search"] { flex: 1 1 0; min-width: 0; width: 100%; }
+  #lecture-map-app .lm-count { margin-left: 0; }
+}

@@ -1,91 +1,51 @@
 ---
 import Base from '../layouts/Base.astro';
+import '../styles/lectures.css';
+import { SHEET_CSV_URL, recordsFromCSV, prepare, listHtml, countText } from '../lib/lectures.js';
+import snapshot from '../data/lectures-snapshot.json';
 
-// Text is kept exactly as on the Wix site. y = year, w = date and event, t = talk, s = empty line.
-const isme = '<a href="http://isme.kimupe.education/" target="_blank" rel="noopener">link</a>';
-const rows = [
-  ['y', '2026'], ['s'], ['s'],
-  ['w', 'March 24 ⎸ Guest lecture for Master in Arts Education'],
-  ['t', 'Embodied learning in (arts) education (Melissa)'],
-  ['w', 'April 9 ⎸ EAS conference'],
-  ['t', 'Embodied Music Pedagogy (Melissa)'],
-  ['w', 'July 27 ⎸ ISME World conference (Montreal, CA)'],
-  ['t', `Workshop: Creative movement in instrumental music learning: a kinemusical approach (Luc) - ${isme}`],
-  ['w', 'July 30 ⎸ ISME World conference (Montreal, CA)'],
-  ['t', `Fostering a Synergy Between the Development of Well-Being and Musicianship: A Kinemusical Perspective (Luc) - ${isme}`],
-  ['w', 'Oct 16 ⎸ Clarinet &amp; Sax Pedagogical Seminar (Knokke, BE)'],
-  ['t', 'The kinemusical approach to instrumental music education (Luc)'],
-  ['w', 'Nov 16 ⎸ Master Art Education Amsterdam Uiversity of the Arts (Amsterdam, NL)'],
-  ['t', 'Embodied Learning in (Art)education (melissa)'],
-  ['w', 'Nov 27 ⎸ Music Engagement, Well-being, and Positive Development (Hongkong, Online)'],
-  ['t', 'Fostering a Synergy Between the Development of Well-Being and Musicianship: A Kinemusical Perspective (Luc)'],
-  ['s'],
-  ['y', '2025'], ['s'],
-  ['w', 'Jan 31 ⎸ Garant Boekenpodium (Antwerp, BE)'],
-  ['t', 'Book presentation "Bewegend Leren Musiceren" (Melissa &amp; Luc)'],
-  ['w', 'Feb 14 ⎸ Conservatorium Groningen (NL)'],
-  ['t', 'Embodiment in Muziek Education (Luc)'],
-  ['w', 'Feb 21 ⎸ Locomus lecture series (online)'],
-  ['t', 'Embodied Music Pedagogy (Melissa &amp; Luc)'],
-  ['w', 'Apr 11 ⎸ guest lecture (Amsterdam, NL)'],
-  ['t', 'Embodied Music Pedagogy (Melissa &amp; Luc)'],
-  ['w', 'Mar 14 ⎸ IFEN (Belaval, LU)'],
-  ['t', 'Embodied (Instrumental) Music Pedagogy (Luc)'],
-  ['w', 'June 06 ⎸ EAS Conference (Evora, PT)'],
-  ['t', '"Unlocking the musical body: an embodied approach to rhythm, melody and harmony.<br />(Melissa &amp; Luc + Sabine Chatelain &amp; Karine Barman)'],
-  ['w', 'Nov 02 ⎸ Podcast (in dutch) (Hilversum, NL)'],
-  ['t', 'Embodied (Instrumental) Music Pedagogy (Melissa &amp; Luc)'],
-  ['t', '<a href="http://www.filosofie-oostwest.nl/podcast/" target="_blank" rel="noopener">link</a>'],
-  ['w', 'Nov 23 ⎸ online café ISME SIG PRIME (Online)'],
-  ['t', 'Embodiment in Music Education - Music as empowerment (Luc)'],
-  ['w', 'Nov 23 ⎸ Adem Congres (Ede-Wageningen, NL)'],
-  ['t', 'The pedagogical body of singing teachers (Melissa)'],
-  ['w', 'Nov 27⎸ possibility STudies Network (Online)'],
-  ['t', 'Pedagogies of the Possible meets Embodied Music Pedagogy (Melissa &amp; Luc)'],
-  ['s'],
-  ['y', '2024'], ['s'],
-  ['w', 'March 5 ⎸ Embodied Underground @ UC Berkeley, online'],
-  ['t', '"The Role of the Body in Instrumental and Vocal Music Pedagogy: A Dynamical Systems Theory Perspective on the Music Teacher\'s Bodily Engagement in Teaching and Learning" (Melissa &amp; Luc)'],
-  ['s'],
-  ['w', 'March 13  ⎸ Bachelor in Music (CvA Course: New Perspectives on Music Education), Amsterdam (NL)'],
-  ['t', 'LECTURE: Embodied Music Pedagogy (Melissa)'],
-  ['s'],
-  ['w', 'April 19 ⎸ Master in Music (CvA Course: New Perspectives on Music Education), Amsterdam (NL)'],
-  ['t', 'LECTURE: The role of the body in instrumental and vocal music pedagogy (Melissa)'],
-  ['s'],
-  ['w', "May 10 ⎸ Matinée de réflection du Ministère d'Education nationale, Enfance et Jeunesse, Walferdange (LU)"],
-  ['t', 'LECTURE: Early Childhood Music Education: An embodied non-linear perspective. (Luc)'],
-  ['s'],
-  ['w', 'May 15-17 ⎸ First International Conference on Embodied Education, Copenhagen (SE)'],
-  ['t', 'ROUNDTABLE: Embodied learning and teaching in Music Education i.c.w. M.J. Juntunen, G Nicolaou (Melissa &amp; Luc)'],
-  ['t', 'WORKSHOP (Melissa &amp; Luc)'],
-  ['s'],
-  ['w', 'May 17 ⎸ Rencontre scientifique "Musique et Transmission à la lumière des sciences cognitives", Strassbourg (F)'],
-  ['t', 'LECTURE: "Développer la créativité musicale par le mouvement : Naviguer dans le paysage d’affordances musicales" (Luc)'],
-  ['s'],
-  ['w', 'May 27 ⎸ MDW lecture series about research methods in music education, Vienna (AU) (online)'],
-  ['t', 'LECTURE: "Investigating the role of movement in instrumentalmusic learnig: challenges and perspectives" (Luc)'],
-  ['s'],
-  ['w', 'May 29 ⎸ Eccla Symposium "Les instruments de musique numériques accessibles : approches, design, évaluation", St Etienne (F)'],
-  ['t', 'LECTURE: "Empowering learners through technology: a perspective from Embodied Music Pedagogy" (Luc)'],
-  ['s'],
-  ['w', 'July 28 - Aug 2  ⎸ ISME world Conference, Helsinki (FI)'],
-  ['t', '<a href="/isme2024">WORKSHOP: Embodied Music Pedagogy in practice</a> (Melissa &amp; Luc)'],
-  ['t', 'LECTURE: Fostering a synergy between the development of well-being and musicianship: a kinemusical perspective (Luc)'],
-  ['s'],
-  ['w', 'September 11  ⎸ Heymans Colloquium, Groningen (NL)'],
-  ['t', 'LECTURE: Embodied Music Pedagogy (Melissa &amp; Luc)'],
-  ['s'],
-  ['w', 'October 1  ⎸ IEEE International Symposium on the Internet of Sounds, Erlangen (DE)'],
-  ['t', 'LECTURE: Internet of Musical Things for Children (Luc)'],
-  ['s'],
-  ['w', 'October 23  ⎸ EMU Early Childhood Music Education Capacity Building Seminar, Grevenmacher (LU)'],
-  ['t', 'WORKSHOP: Instrumental learning in the early years: adopting Embodied Music Pedagogy through a kinemusical approach" (Luc)'],
-];
-const cls = { y: 'year', w: 'when', t: 'what', s: 'sp' };
+// The list is written into the page when the site is built, so search engines
+// can read it. The browser then refreshes it from the sheet for every visitor.
+// If the sheet can't be read during a build, the saved copy keeps the page full.
+let source = snapshot;
+try {
+  const res = await fetch(SHEET_CSV_URL, { signal: AbortSignal.timeout(20000) });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const fromSheet = recordsFromCSV(await res.text());
+  if (!fromSheet.length) throw new Error('no usable rows');
+  source = fromSheet;
+} catch (err) {
+  console.warn('[lectures] Using the saved copy: the sheet could not be read.', err);
+}
+const records = prepare(source);
+const dataJson = JSON.stringify(records).replace(/</g, '\\u003c');
 ---
 <Base title="Lectures | Embodied Music Pedagogy" path="/lectures">
-  <div class="col lectures page-end">
-    {rows.map(([kind, html]) => <p class={cls[kind]} set:html={html ?? ''} />)}
+  <Fragment slot="head">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  </Fragment>
+  <div class="col page-end">
+    <div id="lecture-map-app">
+      <div class="lm-controls">
+        <span><label for="lm-speaker">Speaker</label><select id="lm-speaker"><option value="">all</option></select></span>
+        <span><label for="lm-kind">Type</label><select id="lm-kind"><option value="">all</option></select></span>
+        <span><label for="lm-from">From</label><select id="lm-from"></select>
+          <label for="lm-to">to</label><select id="lm-to"></select></span>
+        <span><input type="search" id="lm-q" aria-label="Search lectures" placeholder="city, title…" size="18"></span>
+        <span class="lm-count" id="lm-count">{countText(records)}</span>
+      </div>
+      <div class="lm-split">
+        <div id="lecture-map"></div>
+        <div id="lm-list-pane"><div id="lm-list" set:html={listHtml(records, records)}></div></div>
+      </div>
+      <div class="lm-status" id="lm-status"></div>
+    </div>
   </div>
+  <script id="lm-data" type="application/json" set:html={dataJson}></script>
+  <script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script is:inline src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 </Base>
+
+<script src="../scripts/lectures.js"></script>
